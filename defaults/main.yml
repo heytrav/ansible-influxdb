@@ -3,7 +3,7 @@ influxdb_version: 1.7.9
 
 influxdb_index_version: tsi1
 influxdb_trace_logging_enabled: false
-
+influxdb_meta_dir: /var/lib/influxdb/meta
 influxdb_meta_retention_autocreate: true
 influxdb_meta_logging_enabled: true
 
