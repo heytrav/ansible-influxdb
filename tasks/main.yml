@@ -1,2 +1,3 @@
 ---
-# tasks file for ops-influxdb
+- import_tasks: debian.yml
+  when: ansible_facts.distribution_os in ['Ubuntu', 'Debian']

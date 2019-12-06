@@ -1,2 +1,2 @@
 ---
-# vars file for ops-influxdb
+influxdb_url: "{{ source.influxdb_url }}"

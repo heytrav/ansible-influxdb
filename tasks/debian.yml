@@ -1,0 +1,16 @@
+
+- name: Import package download url
+  include_vars:
+    file: vars/debian.yml
+    name: source
+
+- name: Install utility package
+  apt:
+    name: xz-utils
+    state: present
+
+- name: Fetch influxdb package
+  apt:
+    name: "{{ influxdb_url }}"
+    state: present
+

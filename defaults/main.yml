@@ -1,2 +1,2 @@
 ---
-# defaults file for ops-influxdb
+influxdb_version: 1.7.9

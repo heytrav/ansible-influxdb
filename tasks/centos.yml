@@ -1,0 +1,12 @@
+
+- name: Import package download url
+  include_vars:
+    file: vars/centos.yml
+    name: source
+
+
+- name: Fetch influxdb package
+  yum:
+    name: "{{ influxdb_url }}"
+    state: present
+
