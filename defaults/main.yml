@@ -101,12 +101,12 @@ influxdb_data_max_values_per_tag: 100000
 # Values without a size suffix are in bytes.
 influxdb_data_max_index_log_file_size: "1m"
 
-# The size of the internal cache used in the TSI index to store previously 
+# The size of the internal cache used in the TSI index to store previously
 # calculated series results. Cached results will be returned quickly from the cache rather
-# than needing to be recalculated when a subsequent query with a matching tag key/value 
+# than needing to be recalculated when a subsequent query with a matching tag key/value
 # predicate is executed. Setting this value to 0 will disable the cache, which may
 # lead to query performance issues.
-# This value should only be increased if it is known that the set of regularly used 
+# This value should only be increased if it is known that the set of regularly used
 # tag key/value predicates across all measurements for a database is larger than 100. An
 # increase in cache size may lead to an increase in heap usage.
 influxdb_data_series_id_set_cache_size: 100
@@ -156,7 +156,7 @@ influxdb_coordinator_max_select_buckets: 0
 influxdb_retention_enabled: true
 
 # The interval of time when retention policy enforcement checks run.
-influxdb_retention_check-interval: "30m"
+influxdb_retention_check_interval: "30m"
 
 ###
 ### [shard-precreation]
@@ -344,8 +344,8 @@ influxdb_graphite_udp_read_buffer: 0
 influxdb_graphite_separator: "."
 ### Default tags that will be added to all metrics.  These can be overridden at the template level
 ### or by tags extracted from metric
-influxdb_graphite_tags: 
-  - "region=us-east" 
+influxdb_graphite_tags:
+  - "region=us-east"
   - "zone=1c"
 
 ### Each template line requires a template pattern.  It can have an optional
@@ -467,10 +467,10 @@ influxdb_continuous_queries_run_interval: 1s
 # for a list of available ciphers, which depends on the version of Go (use the query
 # SHOW DIAGNOSTICS to see the version of Go used to build InfluxDB). If not specified, uses
 # the default settings from Go's crypto/tls package.
-influxdb_tls_ciphers: 
+influxdb_tls_ciphers:
   - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
   - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
- 
+
 
 # Minimum version of the tls protocol that will be negotiated. If not specified, uses the
 # default settings from Go's crypto/tls package.

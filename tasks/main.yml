@@ -1,3 +1,13 @@
 ---
 - import_tasks: debian.yml
-  when: ansible_facts.distribution_os in ['Ubuntu', 'Debian']
+  when: ansible_distribution in ['Ubuntu', 'Debian']
+
+- import_tasks: centos.yml
+  when: ansible_distribution == 'CentOS'
+
+- name: Set up template file
+  template:
+    src: templates/influxdb.conf.j2
+    dest: /etc/influxdb/influxdb.conf
+    owner: root
+    group: root

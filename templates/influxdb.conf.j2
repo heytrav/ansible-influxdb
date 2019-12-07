@@ -192,10 +192,10 @@
 
 [retention]
   # Determines whether retention policy enforcement enabled.
-  # enabled = true
+  enabled = {{ influxdb_retention_enabled }}
 
   # The interval of time when retention policy enforcement checks run.
-  # check-interval = "30m"
+  # check-interval = "{{ influxdb_retention_check_interval }}"
 
 ###
 ### [shard-precreation]
@@ -207,14 +207,14 @@
 
 [shard-precreation]
   # Determines whether shard pre-creation service is enabled.
-  # enabled = true
+  enabled = {{ influxdb_shard_precreation_enabled }}
 
   # The interval of time when the check to pre-create new shards runs.
-  # check-interval = "10m"
+  check-interval = "{{ influxdb_shard_precreation_check_interval }}"
 
   # The default period ahead of the endtime of a shard group that its successor
   # group is created.
-  # advance-period = "30m"
+  advance-period = "{{ influxdb_shard_precreation_advance_period }}"
 
 ###
 ### Controls the system self-monitoring, statistics and diagnostics.
@@ -227,13 +227,13 @@
 
 [monitor]
   # Whether to record statistics internally.
-  # store-enabled = true
+  store-enabled = {{ influxdb_monitor_store_enabled }}
 
   # The destination database for recorded statistics
-  # store-database = "_internal"
+  store-database = "{{ influxdb_monitor_store_database }}"
 
   # The interval at which to record statistics
-  # store-interval = "10s"
+  store-interval = "{{ influxdb_monitor_store_interval }}"
 
 ###
 ### [http]
@@ -244,28 +244,28 @@
 
 [http]
   # Determines whether HTTP endpoint is enabled.
-  # enabled = true
+  enabled = {{ influxdb_http_enabled }}
 
   # Determines whether the Flux query endpoint is enabled.
-  # flux-enabled = false
+  flux-enabled = {{ influxdb_http_flux_enabled }}
 
   # Determines whether the Flux query logging is enabled.
-  # flux-log-enabled = false
+  flux-log-enabled = {{ influxdb_http_flux_log_enabled }}
 
   # The bind address used by the HTTP service.
-  # bind-address = ":8086"
+  bind-address = "{{ influxdb_http_bind_address }}"
 
   # Determines whether user authentication is enabled over HTTP/HTTPS.
-  # auth-enabled = false
+  auth-enabled = {{ influxdb_http_auth_enabled }}
 
   # The default realm sent back when issuing a basic auth challenge.
-  # realm = "InfluxDB"
+  realm = "{{ influxdb_http_realm }}"
 
   # Determines whether HTTP request logging is enabled.
-  # log-enabled = true
+  log-enabled = {{ influxdb_http_log_enabled }}
 
   # Determines whether the HTTP write request logs should be suppressed when the log is enabled.
-  # suppress-write-log = false
+  suppress-write-log = {{ influxdb_http_suppress_write_log }}
 
   # When HTTP request logging is enabled, this option specifies the path where
   # log entries should be written. If unspecified, the default is to write to stderr, which
@@ -273,73 +273,73 @@
   #
   # If influxd is unable to access the specified path, it will log an error and fall back to writing
   # the request log to stderr.
-  # access-log-path = ""
+  access-log-path = "{{ influxdb_http_access_log_path }}"
 
   # Filters which requests should be logged. Each filter is of the pattern NNN, NNX, or NXX where N is
   # a number and X is a wildcard for any number. To filter all 5xx responses, use the string 5xx.
   # If multiple filters are used, then only one has to match. The default is to have no filters which
   # will cause every request to be printed.
-  # access-log-status-filters = []
+  access-log-status-filters = [{% for i in influxdb_http_access_log_status_filters -%} "{{ i }}" {% if not loop.last %},{% endif %}{% endfor %}]
 
   # Determines whether detailed write logging is enabled.
-  # write-tracing = false
+  write-tracing = {{ influxdb_http_write_tracing }}
 
   # Determines whether the pprof endpoint is enabled.  This endpoint is used for
   # troubleshooting and monitoring.
-  # pprof-enabled = true
+  pprof-enabled = {{ influxdb_http_pprof_enabled }}
 
   # Enables authentication on pprof endpoints. Users will need admin permissions
   # to access the pprof endpoints when this setting is enabled. This setting has
   # no effect if either auth-enabled or pprof-enabled are set to false.
-  # pprof-auth-enabled = false
+  pprof-auth-enabled = {{ influxdb_http_auth_enabled }}
 
   # Enables a pprof endpoint that binds to localhost:6060 immediately on startup.
   # This is only needed to debug startup issues.
-  # debug-pprof-enabled = false
+  debug-pprof-enabled = {{ influxdb_http_debug_pprof_enabled }}
 
   # Enables authentication on the /ping, /metrics, and deprecated /status
   # endpoints. This setting has no effect if auth-enabled is set to false.
-  # ping-auth-enabled = false
+  ping-auth-enabled = {{ influxdb_http_ping_auth_enabled }}
 
   # Determines whether HTTPS is enabled.
-  # https-enabled = false
+  https-enabled = {{ influxdb_http_https_enabled }}
 
   # The SSL certificate to use when HTTPS is enabled.
-  # https-certificate = "/etc/ssl/influxdb.pem"
+  https-certificate = "{{ influxdb_http_https_certificate }}"
 
   # Use a separate private key location.
-  # https-private-key = ""
+  https-private-key = "{{ influxdb_http_https_private_key }}"
 
   # The JWT auth shared secret to validate requests using JSON web tokens.
-  # shared-secret = ""
+  shared-secret = "{{ influxdb_http_shared_secret }}"
 
   # The default chunk size for result sets that should be chunked.
-  # max-row-limit = 0
+  max-row-limit = {{ influxdb_http_max_row_limit }} 
 
   # The maximum number of HTTP connections that may be open at once.  New connections that
   # would exceed this limit are dropped.  Setting this value to 0 disables the limit.
-  # max-connection-limit = 0
+  max-connection-limit = {{ influxdb_http_max_connection_limit }}
 
   # Enable http service over unix domain socket
-  # unix-socket-enabled = false
+  unix-socket-enabled = {{ influxdb_http_unix_socket_enabled }}
 
   # The path of the unix domain socket.
-  # bind-socket = "/var/run/influxdb.sock"
+  bind-socket = "{{ influxdb_http_bind_socket }}"
 
   # The maximum size of a client request body, in bytes. Setting this value to 0 disables the limit.
-  # max-body-size = 25000000
+  max-body-size = {{ influxdb_http_max_body_size }}
 
   # The maximum number of writes processed concurrently.
   # Setting this to 0 disables the limit.
-  # max-concurrent-write-limit = 0
+  max-concurrent-write-limit = {{ influxdb_http_max_concurrent_write_limit }} 
 
   # The maximum number of writes queued for processing.
   # Setting this to 0 disables the limit.
-  # max-enqueued-write-limit = 0
+  max-enqueued-write-limit = {{ influxdb_http_max_enqueued_write_limit }} 
 
   # The maximum duration for a write to wait in the queue to be processed.
   # Setting this to 0 or setting max-concurrent-write-limit to 0 disables the limit.
-  # enqueued-write-timeout = 0
+  enqueued-write-timeout = {{ influxdb_http_enqueued_write_timeout }} 
 
 ###
 ### [logging]
@@ -353,16 +353,16 @@
   # output format if the output terminal is a TTY, but the format is not as
   # easily machine-readable. When the output is a non-TTY, auto will use
   # logfmt.
-  # format = "auto"
+  format = "{{ influxdb_logging_format }}"
 
   # Determines which level of logs will be emitted. The available levels
   # are error, warn, info, and debug. Logs that are equal to or above the
   # specified level will be emitted.
-  # level = "info"
+  level = "{{ influxdb_logging_level }}"
 
   # Suppresses the logo output that is printed when the program is started.
   # The logo is always suppressed if STDOUT is not a TTY.
-  # suppress-logo = false
+  suppress-logo = {{ influxdb_logging_suppress_logo }}
 
 ###
 ### [subscriber]
@@ -373,23 +373,23 @@
 
 [subscriber]
   # Determines whether the subscriber service is enabled.
-  # enabled = true
+  enabled = {{ influxdb_subscriber_enabled }}
 
   # The default timeout for HTTP writes to subscribers.
-  # http-timeout = "30s"
+  http-timeout = "{{ influxdb_subscriber_http_timeout }}"
 
   # Allows insecure HTTPS connections to subscribers.  This is useful when testing with self-
   # signed certificates.
-  # insecure-skip-verify = false
+  insecure-skip-verify = {{ influxdb_subscriber_insecure_skip_verify }}
 
   # The path to the PEM encoded CA certs file. If the empty string, the default system certs will be used
-  # ca-certs = ""
+  ca-certs = "{{ influxdb_subscriber_ca_certs }}"
 
   # The number of writer goroutines processing the write channel.
-  # write-concurrency = 40
+  write-concurrency = {{ influxdb_subscriber_write_concurrency }}
 
   # The number of in-flight writes buffered in the write channel.
-  # write-buffer-size = 1000
+  write-buffer-size = {{ influxdb_subscriber_write_buffer_size }}
 
 
 ###
@@ -400,45 +400,45 @@
 
 [[graphite]]
   # Determines whether the graphite endpoint is enabled.
-  # enabled = false
-  # database = "graphite"
-  # retention-policy = ""
-  # bind-address = ":2003"
-  # protocol = "tcp"
-  # consistency-level = "one"
+  enabled = {{ influxdb_graphite_enabled }}
+  database = "{{ influxdb_graphite_database }}"
+  retention-policy = "{{ influxdb_graphite_retention_policy }}"
+  bind-address = "{{ influxdb_graphite_bind_address }}"
+  protocol = "{{ influxdb_graphite_protocol }}"
+  consistency-level = "{{ influxdb_graphite_consistency_level }}"
 
   # These next lines control how batching works. You should have this enabled
   # otherwise you could get dropped metrics or poor performance. Batching
   # will buffer points in memory if you have many coming in.
 
   # Flush if this many points get buffered
-  # batch-size = 5000
+  batch-size = {{ influxdb_graphite_batch_size }}
 
   # number of batches that may be pending in memory
-  # batch-pending = 10
+  batch-pending = {{ influxdb_graphite_batch_pending }}
 
   # Flush at least this often even if we haven't hit buffer limit
-  # batch-timeout = "1s"
+  batch-timeout = "{{ influxdb_graphite_batch_timeout }}"
 
   # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
-  # udp-read-buffer = 0
+  udp-read-buffer = {{ influxdb_graphite_udp_read_buffer }} 
 
   ### This string joins multiple matching 'measurement' values providing more control over the final measurement name.
-  # separator = "."
+  separator = "{{ influxdb_graphite_separator }}"
 
   ### Default tags that will be added to all metrics.  These can be overridden at the template level
   ### or by tags extracted from metric
-  # tags = ["region=us-east", "zone=1c"]
+  tags = [{% for i in influxdb_graphite_tags -%}"{{ i }}"{% if not loop.last %},{% endif %}{%- endfor %}]
 
   ### Each template line requires a template pattern.  It can have an optional
   ### filter before the template and separated by spaces.  It can also have optional extra
   ### tags following the template.  Multiple tags should be separated by commas and no spaces
   ### similar to the line protocol format.  There can be only one default template.
-  # templates = [
-  #   "*.app env.service.resource.measurement",
-  #   # Default template
-  #   "server.*",
-  # ]
+  templates = [
+  {% for i in influxdb_graphite_templates %}
+  "{{ i }}"{% if not loop.last %},{% endif %}
+  {% endfor %}
+  ]
 
 ###
 ### [collectd]
@@ -447,39 +447,39 @@
 ###
 
 [[collectd]]
-  # enabled = false
-  # bind-address = ":25826"
-  # database = "collectd"
-  # retention-policy = ""
-  #
+  enabled = {{ influxdb_collectd_enabled }}
+  bind-address = "{{ influxdb_collectd_bind_address }}"
+  database = "{{ influxdb_collectd_database }}"
+  retention-policy = "{{ influxdb_collectd_retention_policy }}"
+  
   # The collectd service supports either scanning a directory for multiple types
   # db files, or specifying a single db file.
-  # typesdb = "/usr/local/share/collectd"
+   typesdb = "{{ influxdb_collectd_typesdb }}"
   #
-  # security-level = "none"
-  # auth-file = "/etc/collectd/auth_file"
+  security-level = "{{ influxdb_collectd_security_level }}"
+  auth-file = "{{ influxdb_collectd_auth_file }}"
 
   # These next lines control how batching works. You should have this enabled
   # otherwise you could get dropped metrics or poor performance. Batching
   # will buffer points in memory if you have many coming in.
 
   # Flush if this many points get buffered
-  # batch-size = 5000
+  batch-size = {{ influxdb_collectd_batch_size }}
 
   # Number of batches that may be pending in memory
-  # batch-pending = 10
+  batch-pending = {{ influxdb_collectd_batch_pending }} 
 
   # Flush at least this often even if we haven't hit buffer limit
-  # batch-timeout = "10s"
+  batch-timeout = "{{ influxdb_collectd_batch_timeout }}"
 
   # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
-  # read-buffer = 0
+  read-buffer = {{ influxdb_collectd_read_buffer }} 
 
   # Multi-value plugins can be handled two ways.
   # "split" will parse and store the multi-value plugin data into separate measurements
   # "join" will parse and store the multi-value plugin as a single multi-value measurement.
   # "split" is the default behavior for backward compatibility with previous versions of influxdb.
-  # parse-multivalue-plugin = "split"
+  parse-multivalue-plugin = "{{ influxdb_collectd_parse_multivalue_plugin }}"
 ###
 ### [opentsdb]
 ###
@@ -487,29 +487,29 @@
 ###
 
 [[opentsdb]]
-  # enabled = false
-  # bind-address = ":4242"
-  # database = "opentsdb"
-  # retention-policy = ""
-  # consistency-level = "one"
-  # tls-enabled = false
-  # certificate= "/etc/ssl/influxdb.pem"
+  enabled = {{ influxdb_opentsdb_enabled }}
+  bind-address = "{{ influxdb_opentsdb_bind_address }}"
+  database = "{{ influxdb_opentsdb_database }}"
+  retention-policy = "{{ influxdb_opentsdb_retention_policy }}"
+  consistency-level = "{{ influxdb_opentsdb_consistency_level }}"
+  tls-enabled = {{ influxdb_opentsdb_tls_enabled }}
+  certificate= "{{ influxdb_opentsdb_certificate }}"
 
   # Log an error for every malformed point.
-  # log-point-errors = true
+   log-point-errors = {{ influxdb_opentsdb_log_point_errors }}
 
   # These next lines control how batching works. You should have this enabled
   # otherwise you could get dropped metrics or poor performance. Only points
   # metrics received over the telnet protocol undergo batching.
 
   # Flush if this many points get buffered
-  # batch-size = 1000
+  batch-size = {{ influxdb_opentsdb_batch_size }}
 
   # Number of batches that may be pending in memory
-  # batch-pending = 5
+  batch-pending = {{ influxdb_opentsdb_batch_pending }} 
 
   # Flush at least this often even if we haven't hit buffer limit
-  # batch-timeout = "1s"
+  batch-timeout = "1s"
 
 ###
 ### [[udp]]
@@ -518,29 +518,29 @@
 ###
 
 [[udp]]
-  # enabled = false
-  # bind-address = ":8089"
-  # database = "udp"
-  # retention-policy = ""
+  enabled = {{ influxdb_udp_enabled }}
+  bind-address = "{{ influxdb_udp_bind_address }}"
+  database = "{{ influxdb_udp_database }}"
+  retention-policy = "{{ influxdb_udp_retention_policy }}"
 
   # InfluxDB precision for timestamps on received points ("" or "n", "u", "ms", "s", "m", "h")
-  # precision = ""
+  precision = "{{ influxdb_udp_precision }}"
 
   # These next lines control how batching works. You should have this enabled
   # otherwise you could get dropped metrics or poor performance. Batching
   # will buffer points in memory if you have many coming in.
 
   # Flush if this many points get buffered
-  # batch-size = 5000
+  batch-size = {{ influxdb_udp_batch_size }}
 
   # Number of batches that may be pending in memory
-  # batch-pending = 10
+  batch-pending = {{ influxdb_udp_batch_pending }}
 
   # Will flush at least this often even if we haven't hit buffer limit
-  # batch-timeout = "1s"
+  batch-timeout = "{{ influxdb_udp_batch_timeout }}"
 
   # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
-  # read-buffer = 0
+  read-buffer = {{ influxdb_udp_read_buffer }} 
 
 ###
 ### [continuous_queries]
@@ -550,16 +550,16 @@
 
 [continuous_queries]
   # Determines whether the continuous query service is enabled.
-  # enabled = true
+  enabled = {{ influxdb_continuous_queries_enabled }}
 
   # Controls whether queries are logged when executed by the CQ service.
-  # log-enabled = true
+  log-enabled = {{ influxdb_continuous_queries_log_enabled }}
 
   # Controls whether queries are logged to the self-monitoring data store.
-  # query-stats-enabled = false
+  query-stats-enabled = {{ influxdb_continuous_queries_query_stats_enabled }}
 
   # interval for how often continuous queries will be checked if they need to run
-  # run-interval = "1s"
+  run-interval = "{{ influxdb_continuous_queries_run_interval }}"
 
 ###
 ### [tls]
@@ -572,15 +572,16 @@
   # for a list of available ciphers, which depends on the version of Go (use the query
   # SHOW DIAGNOSTICS to see the version of Go used to build InfluxDB). If not specified, uses
   # the default settings from Go's crypto/tls package.
-  # ciphers = [
-  #   "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
-  #   "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
-  # ]
+   ciphers = [
+   {% for i in influxdb_tls_ciphers %}
+   "{{ i }}",
+   {% endfor %}
+   ]
 
   # Minimum version of the tls protocol that will be negotiated. If not specified, uses the
   # default settings from Go's crypto/tls package.
-  # min-version = "tls1.2"
+  min-version = "{{ influxdb_tls_min_version }}"
 
   # Maximum version of the tls protocol that will be negotiated. If not specified, uses the
   # default settings from Go's crypto/tls package.
-  # max-version = "tls1.2"
+  max-version = "{{ influxdb_tls_max_version }}"
