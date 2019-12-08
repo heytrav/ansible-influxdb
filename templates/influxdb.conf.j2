@@ -26,10 +26,10 @@
   dir = "{{ influxdb_meta_dir }}"
 
   # Automatically create a default retention policy when creating a database.
-  # retention-autocreate = {{ influxdb_meta_retention_autocreate }}
+  retention-autocreate = {{ influxdb_meta_retention_autocreate | lower }}
 
   # If log messages are printed for the meta service
-  # logging-enabled = {{ influxdb_meta_logging_enabled }}
+  logging-enabled = {{ influxdb_meta_logging_enabled | lower }}
 
 ###
 ### [data]
@@ -61,15 +61,15 @@
 
   # Trace logging provides more verbose output around the tsm engine. Turning
   # this on can provide more useful output for debugging tsm engine issues.
-  trace-logging-enabled = {{ influxdb_data_trace_logging_enabled }}
+  trace-logging-enabled = {{ influxdb_data_trace_logging_enabled | lower }}
 
   # Whether queries should be logged before execution. Very useful for troubleshooting, but will
   # log any sensitive data contained within a query.
-  query-log-enabled = {{ influxdb_data_query_log_enabled }}
+  query-log-enabled = {{ influxdb_data_query_log_enabled | lower }}
 
   # Validates incoming writes to ensure keys only have valid unicode characters.
   # This setting will incur a small overhead because every key must be checked.
-  validate-keys = {{ influxdb_data_validate_keys }}
+  validate-keys = {{ influxdb_data_validate_keys | lower }}
 
   # Settings for the TSM engine
 
@@ -113,7 +113,7 @@
   # If true, then the mmap advise value MADV_WILLNEED will be provided to the kernel with respect to
   # TSM files. This setting has been found to be problematic on some kernels, and defaults to off.
   # It might help users who have slow disks in some cases.
-  tsm-use-madv-willneed = {{ influxdb_data_tsm_use_madv_willneed }}
+  tsm-use-madv-willneed = {{ influxdb_data_tsm_use_madv_willneed | lower }}
 
   # Settings for the inmem index
 
@@ -192,7 +192,7 @@
 
 [retention]
   # Determines whether retention policy enforcement enabled.
-  enabled = {{ influxdb_retention_enabled }}
+  enabled = {{ influxdb_retention_enabled | lower }}
 
   # The interval of time when retention policy enforcement checks run.
   # check-interval = "{{ influxdb_retention_check_interval }}"
@@ -207,7 +207,7 @@
 
 [shard-precreation]
   # Determines whether shard pre-creation service is enabled.
-  enabled = {{ influxdb_shard_precreation_enabled }}
+  enabled = {{ influxdb_shard_precreation_enabled | lower }}
 
   # The interval of time when the check to pre-create new shards runs.
   check-interval = "{{ influxdb_shard_precreation_check_interval }}"
@@ -227,7 +227,7 @@
 
 [monitor]
   # Whether to record statistics internally.
-  store-enabled = {{ influxdb_monitor_store_enabled }}
+  store-enabled = {{ influxdb_monitor_store_enabled | lower }}
 
   # The destination database for recorded statistics
   store-database = "{{ influxdb_monitor_store_database }}"
@@ -244,28 +244,28 @@
 
 [http]
   # Determines whether HTTP endpoint is enabled.
-  enabled = {{ influxdb_http_enabled }}
+  enabled = {{ influxdb_http_enabled | lower }}
 
   # Determines whether the Flux query endpoint is enabled.
-  flux-enabled = {{ influxdb_http_flux_enabled }}
+  flux-enabled = {{ influxdb_http_flux_enabled | lower }}
 
   # Determines whether the Flux query logging is enabled.
-  flux-log-enabled = {{ influxdb_http_flux_log_enabled }}
+  flux-log-enabled = {{ influxdb_http_flux_log_enabled | lower }}
 
   # The bind address used by the HTTP service.
   bind-address = "{{ influxdb_http_bind_address }}"
 
   # Determines whether user authentication is enabled over HTTP/HTTPS.
-  auth-enabled = {{ influxdb_http_auth_enabled }}
+  auth-enabled = {{ influxdb_http_auth_enabled | lower }}
 
   # The default realm sent back when issuing a basic auth challenge.
   realm = "{{ influxdb_http_realm }}"
 
   # Determines whether HTTP request logging is enabled.
-  log-enabled = {{ influxdb_http_log_enabled }}
+  log-enabled = {{ influxdb_http_log_enabled | lower }}
 
   # Determines whether the HTTP write request logs should be suppressed when the log is enabled.
-  suppress-write-log = {{ influxdb_http_suppress_write_log }}
+  suppress-write-log = {{ influxdb_http_suppress_write_log | lower }}
 
   # When HTTP request logging is enabled, this option specifies the path where
   # log entries should be written. If unspecified, the default is to write to stderr, which
@@ -282,27 +282,27 @@
   access-log-status-filters = [{% for i in influxdb_http_access_log_status_filters -%} "{{ i }}" {% if not loop.last %},{% endif %}{% endfor %}]
 
   # Determines whether detailed write logging is enabled.
-  write-tracing = {{ influxdb_http_write_tracing }}
+  write-tracing = {{ influxdb_http_write_tracing | lower }}
 
   # Determines whether the pprof endpoint is enabled.  This endpoint is used for
   # troubleshooting and monitoring.
-  pprof-enabled = {{ influxdb_http_pprof_enabled }}
+  pprof-enabled = {{ influxdb_http_pprof_enabled | lower }}
 
   # Enables authentication on pprof endpoints. Users will need admin permissions
   # to access the pprof endpoints when this setting is enabled. This setting has
   # no effect if either auth-enabled or pprof-enabled are set to false.
-  pprof-auth-enabled = {{ influxdb_http_auth_enabled }}
+  pprof-auth-enabled = {{ influxdb_http_auth_enabled | lower }}
 
   # Enables a pprof endpoint that binds to localhost:6060 immediately on startup.
   # This is only needed to debug startup issues.
-  debug-pprof-enabled = {{ influxdb_http_debug_pprof_enabled }}
+  debug-pprof-enabled = {{ influxdb_http_debug_pprof_enabled | lower }}
 
   # Enables authentication on the /ping, /metrics, and deprecated /status
   # endpoints. This setting has no effect if auth-enabled is set to false.
-  ping-auth-enabled = {{ influxdb_http_ping_auth_enabled }}
+  ping-auth-enabled = {{ influxdb_http_ping_auth_enabled | lower }}
 
   # Determines whether HTTPS is enabled.
-  https-enabled = {{ influxdb_http_https_enabled }}
+  https-enabled = {{ influxdb_http_https_enabled | lower }}
 
   # The SSL certificate to use when HTTPS is enabled.
   https-certificate = "{{ influxdb_http_https_certificate }}"
@@ -321,7 +321,7 @@
   max-connection-limit = {{ influxdb_http_max_connection_limit }}
 
   # Enable http service over unix domain socket
-  unix-socket-enabled = {{ influxdb_http_unix_socket_enabled }}
+  unix-socket-enabled = {{ influxdb_http_unix_socket_enabled | lower }}
 
   # The path of the unix domain socket.
   bind-socket = "{{ influxdb_http_bind_socket }}"
@@ -362,7 +362,7 @@
 
   # Suppresses the logo output that is printed when the program is started.
   # The logo is always suppressed if STDOUT is not a TTY.
-  suppress-logo = {{ influxdb_logging_suppress_logo }}
+  suppress-logo = {{ influxdb_logging_suppress_logo | lower }}
 
 ###
 ### [subscriber]
@@ -373,14 +373,14 @@
 
 [subscriber]
   # Determines whether the subscriber service is enabled.
-  enabled = {{ influxdb_subscriber_enabled }}
+  enabled = {{ influxdb_subscriber_enabled | lower }}
 
   # The default timeout for HTTP writes to subscribers.
   http-timeout = "{{ influxdb_subscriber_http_timeout }}"
 
   # Allows insecure HTTPS connections to subscribers.  This is useful when testing with self-
   # signed certificates.
-  insecure-skip-verify = {{ influxdb_subscriber_insecure_skip_verify }}
+  insecure-skip-verify = {{ influxdb_subscriber_insecure_skip_verify | lower }}
 
   # The path to the PEM encoded CA certs file. If the empty string, the default system certs will be used
   ca-certs = "{{ influxdb_subscriber_ca_certs }}"
@@ -400,7 +400,7 @@
 
 [[graphite]]
   # Determines whether the graphite endpoint is enabled.
-  enabled = {{ influxdb_graphite_enabled }}
+  enabled = {{ influxdb_graphite_enabled | lower }}
   database = "{{ influxdb_graphite_database }}"
   retention-policy = "{{ influxdb_graphite_retention_policy }}"
   bind-address = "{{ influxdb_graphite_bind_address }}"
@@ -447,7 +447,7 @@
 ###
 
 [[collectd]]
-  enabled = {{ influxdb_collectd_enabled }}
+  enabled = {{ influxdb_collectd_enabled | lower }}
   bind-address = "{{ influxdb_collectd_bind_address }}"
   database = "{{ influxdb_collectd_database }}"
   retention-policy = "{{ influxdb_collectd_retention_policy }}"
@@ -487,16 +487,16 @@
 ###
 
 [[opentsdb]]
-  enabled = {{ influxdb_opentsdb_enabled }}
+  enabled = {{ influxdb_opentsdb_enabled | lower }}
   bind-address = "{{ influxdb_opentsdb_bind_address }}"
   database = "{{ influxdb_opentsdb_database }}"
   retention-policy = "{{ influxdb_opentsdb_retention_policy }}"
   consistency-level = "{{ influxdb_opentsdb_consistency_level }}"
-  tls-enabled = {{ influxdb_opentsdb_tls_enabled }}
+  tls-enabled = {{ influxdb_opentsdb_tls_enabled | lower }}
   certificate= "{{ influxdb_opentsdb_certificate }}"
 
   # Log an error for every malformed point.
-   log-point-errors = {{ influxdb_opentsdb_log_point_errors }}
+   log-point-errors = {{ influxdb_opentsdb_log_point_errors | lower }}
 
   # These next lines control how batching works. You should have this enabled
   # otherwise you could get dropped metrics or poor performance. Only points
@@ -518,7 +518,7 @@
 ###
 
 [[udp]]
-  enabled = {{ influxdb_udp_enabled }}
+  enabled = {{ influxdb_udp_enabled | lower }}
   bind-address = "{{ influxdb_udp_bind_address }}"
   database = "{{ influxdb_udp_database }}"
   retention-policy = "{{ influxdb_udp_retention_policy }}"
@@ -550,13 +550,13 @@
 
 [continuous_queries]
   # Determines whether the continuous query service is enabled.
-  enabled = {{ influxdb_continuous_queries_enabled }}
+  enabled = {{ influxdb_continuous_queries_enabled | lower }}
 
   # Controls whether queries are logged when executed by the CQ service.
-  log-enabled = {{ influxdb_continuous_queries_log_enabled }}
+  log-enabled = {{ influxdb_continuous_queries_log_enabled | lower }}
 
   # Controls whether queries are logged to the self-monitoring data store.
-  query-stats-enabled = {{ influxdb_continuous_queries_query_stats_enabled }}
+  query-stats-enabled = {{ influxdb_continuous_queries_query_stats_enabled | lower }}
 
   # interval for how often continuous queries will be checked if they need to run
   run-interval = "{{ influxdb_continuous_queries_run_interval }}"

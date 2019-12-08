@@ -20,3 +20,5 @@ verifier:
   name: testinfra
   lint:
     name: flake8
+  options:
+    verbose: true
