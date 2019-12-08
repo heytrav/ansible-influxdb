@@ -49,11 +49,3 @@ def test_database_directory_created(host):
 
     """
     assert host.file('/var/lib/influxdb').is_directory
-
-
-def test_influx_service_enabled(host):
-    """Test InfluxDB service enabled
-
-    """
-    service = host.service('influxdb')
-    assert service.is_enabled

@@ -12,3 +12,5 @@
   apt:
     deb: "{{ influxdb_url }}"
     state: present
+  notify:
+    - influxdb started

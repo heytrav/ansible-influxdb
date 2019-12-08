@@ -11,3 +11,6 @@
     dest: /etc/influxdb/influxdb.conf
     owner: root
     group: root
+  notify:
+    - influxdb started
+    - influxdb restarted

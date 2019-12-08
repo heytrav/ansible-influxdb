@@ -7,3 +7,5 @@
   yum:
     name: "{{ influxdb_url }}"
     state: present
+  notify:
+    - influxdb started
