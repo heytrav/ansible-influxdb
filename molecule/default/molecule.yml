@@ -7,11 +7,32 @@ lint:
   name: yamllint
 platforms:
   - name: centos7
-    image: centos:7
+    image: percygrunwald/docker-centos7-ansible
+    privileged: false
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    pre_build_image: true
+    environment:
+      container: docker
   - name: bionic
-    image: ubuntu:18.04
+    image: percygrunwald/docker-ubuntu1804-ansible
+    privileged: false
+    pre_build_image: true
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:
+      container: docker
   - name: xenial
-    image: ubuntu:16.04
+    image: percygrunwald/docker-ubuntu1604-ansible
+    privileged: false
+    pre_build_image: true
+    command: ""
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    environment:
+      container: docker
 provisioner:
   name: ansible
   lint:

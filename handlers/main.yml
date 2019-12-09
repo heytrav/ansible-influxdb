@@ -3,11 +3,8 @@
   service:
     name: influxd
     state: started
-  when: influxdb_startup
 
 - name: influxdb restarted
   service:
     name: influxd
     state: restarted
-  when: influxdb_startup
-

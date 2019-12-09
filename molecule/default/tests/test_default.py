@@ -22,8 +22,16 @@ def test_config_logging_enabled(host):
     :host: host object
     """
     content = host.file('/etc/influxdb/influxdb.conf').content_string
-    meta_logging_enabled_pattern = re.compile(r"^\s+logging-enabled\s+=\s+(?P<logging_enabled>[^\s]+)\s*$", re.M)
-    trace_logging_enabled_pattern = re.compile(r"^\s+trace-logging-enabled\s+=\s+(?P<logging_enabled>[^\s]+)\s*$", re.M)
+    meta_logging_enabled_pattern = re.compile(
+            r"^\s+logging-enabled\s+=\s+(?P<logging_enabled>[^\s]+)\s*$", re.M
+            | re.X)
+    trace_logging_enabled_pattern = re.compile(
+            r"""^\s+
+            trace-logging-enabled
+            \s+=\s+
+            (?P<logging_enabled>[^\s]+)
+            \s*$""",
+            re.M | re.X)
 
     meta_result = re.search(meta_logging_enabled_pattern, content)
     trace_result = re.search(trace_logging_enabled_pattern, content)

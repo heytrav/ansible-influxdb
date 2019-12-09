@@ -1,6 +1,6 @@
 ---
 influxdb_version: 1.7.9
-influxdb_startup: true
+
 
 influxdb_index_version: tsi1
 influxdb_meta_dir: /var/lib/influxdb/meta
