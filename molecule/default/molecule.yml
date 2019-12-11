@@ -9,30 +9,33 @@ platforms:
   - name: centos7
     image: percygrunwald/docker-centos7-ansible
     privileged: false
-    command: ""
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     pre_build_image: true
     environment:
       container: docker
+    override_command: False
+    tty: True
   - name: bionic
     image: percygrunwald/docker-ubuntu1804-ansible
     privileged: false
     pre_build_image: true
-    command: ""
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     environment:
       container: docker
+    tty: True
+    override_command: False
   - name: xenial
     image: percygrunwald/docker-ubuntu1604-ansible
     privileged: false
     pre_build_image: true
-    command: ""
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     environment:
       container: docker
+    tty: True
+    override_command: False
 provisioner:
   name: ansible
   lint:
