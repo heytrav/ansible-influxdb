@@ -211,6 +211,8 @@ influxdb_http_flux_log_enabled: false
 influxdb_http_bind_address: ":8086"
 # Determines whether user authentication is enabled over HTTP/HTTPS.
 influxdb_http_auth_enabled: false
+influxdb_admin_user_name: admin
+admin_user_password: "{{ influxdb_admin_user_password }}"
 # The default realm sent back when issuing a basic auth challenge.
 influxdb_http_realm: InfluxDB
 # Determines whether HTTP request logging is enabled.
@@ -237,13 +239,13 @@ influxdb_http_pprof_enabled: true
 # Enables authentication on pprof endpoints. Users will need admin permissions
 # to access the pprof endpoints when this setting is enabled. This setting has
 # no effect if either auth-enabled or pprof-enabled are set to false.
-influxdb_http_pprof_auth_enabled: false
+influxdb_http_pprof_auth_enabled: "{{ influxdb_http_pprof_enabled }}"
 # Enables a pprof endpoint that binds to localhost:6060 immediately on startup.
 # This is only needed to debug startup issues.
 influxdb_http_debug_pprof_enabled: false
 # Enables authentication on the /ping, /metrics, and deprecated /status
 # endpoints. This setting has no effect if auth-enabled is set to false.
-influxdb_http_ping_auth_enabled: false
+influxdb_http_ping_auth_enabled: "{{ influxdb_http_pprof_enabled }}"
 # Determines whether HTTPS is enabled.
 influxdb_http_https_enabled: false
 # The SSL certificate to use when HTTPS is enabled.

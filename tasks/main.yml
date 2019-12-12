@@ -14,3 +14,6 @@
   notify:
     - influxdb started
     - influxdb restarted
+
+- import_tasks: create-admin.yml
+  when: influxdb_http_auth_enabled
