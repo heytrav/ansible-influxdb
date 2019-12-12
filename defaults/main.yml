@@ -189,7 +189,7 @@ influxdb_shard_precreation_advance_period: 30m
 influxdb_monitor_store_enabled: true
 
 # The destination database for recorded statistics
-influxdb_monitor_store_database: "_internal"
+influxdb_monitor_store_database: _internal
 
 # The interval at which to record statistics
 influxdb_monitor_store_interval: 10s
@@ -339,7 +339,7 @@ influxdb_graphite_batch_size: 5000
 # number of batches that may be pending in memory
 influxdb_graphite_batch_pending: 10
 # Flush at least this often even if we haven't hit buffer limit
-influxdb_graphite_batch_timeout: "1s"
+influxdb_graphite_batch_timeout: 1s
 # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
 influxdb_graphite_udp_read_buffer: 0
 ### This string joins multiple matching 'measurement' values providing more control over the final measurement name.
@@ -442,7 +442,7 @@ influxdb_udp_batch_size: 5000
 influxdb_udp_batch_pending: 10
 
 # Will flush at least this often even if we haven't hit buffer limit
-influxdb_udp_batch_timeout: "1s"
+influxdb_udp_batch_timeout: 1s
 
 # UDP Read buffer size, 0 means OS default. UDP listener will fail if set above OS max.
 influxdb_udp_read_buffer: 0
