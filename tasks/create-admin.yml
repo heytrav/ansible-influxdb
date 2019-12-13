@@ -1,5 +1,7 @@
 - meta: flush_handlers
 
 - name: Add admin user to influx
-  command: >
-    influx -execute "CREATE USER admin WITH PASSWORD '{{ influxdb_admin_user_password }}' WITH ALL PRIVILEGES"
+  influxdb_user:
+    user_name: "{{ influxdb_admin_user }}"
+    user_password: "{{ influxdb_admin_user_password }}"
+    state: present

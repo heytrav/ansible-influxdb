@@ -6,6 +6,7 @@ influxdb_index_version: tsi1
 influxdb_meta_dir: /var/lib/influxdb/meta
 influxdb_meta_retention_autocreate: true
 influxdb_meta_logging_enabled: true
+influxdb_admin_user: admin
 
 
 # The directory where the TSM storage engine stores TSM files.
