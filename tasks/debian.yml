@@ -6,6 +6,7 @@
 - name: Install utility packages
   apt:
     name:
+      - net-tools
       - python-setuptools
       - python-apt
       - python-pip

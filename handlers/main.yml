@@ -1,10 +1,11 @@
 ---
 - name: influxdb started
-  service:
+  systemd:
     name: influxd
     state: started
+    daemon_reload: yes
 
 - name: influxdb restarted
-  service:
+  systemd:
     name: influxd
     state: restarted

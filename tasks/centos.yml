@@ -20,4 +20,3 @@
     state: present
   notify:
     - influxdb started
-

@@ -5,4 +5,5 @@
   vars:
     ansible_user: ansible
   roles:
-    - role: ops-influxdb
+    - role: heytrav.influxdb
+      influxdb_admin_user_password: abc12345xyz!

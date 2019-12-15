@@ -1,4 +1,4 @@
-- name: Install 
+- name: Install some python dependencies
   pip:
     name:
       - requests
@@ -9,12 +9,6 @@
   service:
     name: influxd
     state: started
-
-- name: Restart influxd
-  service:
-    name: influxd
-    state: restarted
-
 
 - name: Wait for a connection on influxdb port
   wait_for:

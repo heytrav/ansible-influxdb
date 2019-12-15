@@ -9,27 +9,39 @@ platforms:
   - name: centos7
     image: percygrunwald/docker-centos7-ansible
     privileged: false
+    command: /sbin/init
+    tmpfs:
+      - /run
+      - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     pre_build_image: true
     environment:
       container: docker
-    override_command: False
+      # override_command: False
     tty: True
   - name: bionic
-    image: percygrunwald/docker-ubuntu1804-ansible
-    privileged: false
+    command: /sbin/init
+    image: percygrunwald/docker-ubuntu1804-ansible:latest
+    privileged: true
     pre_build_image: true
+    tmpfs:
+      - /run
+      - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     environment:
       container: docker
     tty: True
-    override_command: False
+    #override_command: False
   - name: xenial
-    image: percygrunwald/docker-ubuntu1604-ansible
-    privileged: false
+    #command: /sbin/init
+    image: percygrunwald/docker-ubuntu1604-ansible:latest
+    privileged: true
     pre_build_image: true
+    tmpfs:
+      - /run
+      - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     environment:

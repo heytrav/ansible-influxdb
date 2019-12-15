@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Travis Holton
-  description: Senior DevOps Guy
+  description: Install and configure Influx DB
   company: Catalyst
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -17,7 +17,7 @@ galaxy_info:
   # - CC-BY
   license: BSD
 
-  min_ansible_version: 1.2
+  min_ansible_version: 2.8
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -42,7 +42,7 @@ galaxy_info:
       - 18.04
       - 16.04
 
-  galaxy_tags: []
+  galaxy_tags: ['influxdb']
   # List tags for your role here, one per line. A tag is a keyword that describes
   # and categorizes the role. Users find roles by searching for tags. Be sure to
   # remove the '[]' above, if you add tags to this list.
