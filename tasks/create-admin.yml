@@ -1,7 +1,29 @@
-- meta: flush_handlers
+- name: Install 
+  pip:
+    name:
+      - requests
+      - influxdb
+    state: present
+
+- name: Start influxd
+  service:
+    name: influxd
+    state: started
+
+- name: Restart influxd
+  service:
+    name: influxd
+    state: restarted
+
+
+- name: Wait for a connection on influxdb port
+  wait_for:
+    host: localhost
+    port: 8086
 
 - name: Add admin user to influx
   influxdb_user:
+    admin: yes
     user_name: "{{ influxdb_admin_user }}"
     user_password: "{{ influxdb_admin_user_password }}"
     state: present

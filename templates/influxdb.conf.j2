@@ -434,8 +434,8 @@
   ### filter before the template and separated by spaces.  It can also have optional extra
   ### tags following the template.  Multiple tags should be separated by commas and no spaces
   ### similar to the line protocol format.  There can be only one default template.
-  templates = [
-  {% for i in influxdb_graphite_templates %}
+  #templates = [
+  {%- for i in influxdb_graphite_templates %}
   "{{ i }}"{% if not loop.last %},{% endif %}
   {% endfor %}
   ]

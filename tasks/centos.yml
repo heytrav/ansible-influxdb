@@ -3,9 +3,21 @@
     file: vars/centos.yml
     name: source
 
+- name: Install epel release
+  yum:
+    name: epel-release
+    state: present
+
+- name: Install pip
+  yum:
+    name: python-pip
+    state: present
+    update_cache: yes
+
 - name: Install influxdb
   yum:
     name: "{{ influxdb_url }}"
     state: present
   notify:
     - influxdb started
+

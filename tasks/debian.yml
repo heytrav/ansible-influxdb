@@ -3,10 +3,15 @@
     file: vars/debian.yml
     name: source
 
-- name: Install utility package
+- name: Install utility packages
   apt:
-    name: xz-utils
+    name:
+      - python-setuptools
+      - python-apt
+      - python-pip
+      - xz-utils
     state: present
+    update_cache: yes
 
 - name: Install influxdb
   apt:

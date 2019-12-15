@@ -10,12 +10,25 @@ lint:
 platforms:
   - name: xenial
     box: ubuntu/xenial64
+    groups:
+      - ubuntu
+    children:
+      - xenial_host
   - name: bionic
     box: ubuntu/bionic64
+    groups:
+      - ubuntu
+    children:
+      - bionic_host
   - name: centos7
     box: centos/7
+    groups:
+      - centos
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      timeout: 30
   lint:
     name: ansible-lint
 verifier:

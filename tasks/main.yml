@@ -16,4 +16,4 @@
     - influxdb restarted
 
 - import_tasks: create-admin.yml
-  when: influxdb_http_auth_enabled
+  when: influxdb_admin_user_password is defined

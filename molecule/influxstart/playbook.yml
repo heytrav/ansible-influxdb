@@ -1,6 +1,8 @@
 ---
+
 - name: Converge
   hosts: all
   become: true
   roles:
     - role: ops-influxdb
+      influxdb_admin_user_password: abc12345xyz!
