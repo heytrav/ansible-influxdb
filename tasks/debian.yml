@@ -7,9 +7,9 @@
   apt:
     name:
       - net-tools
-      - python-setuptools
-      - python-apt
-      - python-pip
+      - python3-setuptools
+      - python3-apt
+      - python3-pip
       - xz-utils
     state: present
     update_cache: yes
