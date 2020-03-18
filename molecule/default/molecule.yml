@@ -50,8 +50,6 @@ provisioner:
   name: ansible
 verifier:
   name: testinfra
-  options:
-    verbose: true
 lint: |
   set -e
   yamllint -f colored .
