@@ -50,14 +50,12 @@ platforms:
     override_command: False
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
 verifier:
   name: testinfra
-  lint: |
-    set -e
-    yamllint -f colored .
-    ansible-lint --force-color
-    flake8
   options:
     verbose: true
+lint: |
+  set -e
+  yamllint -f colored .
+  ansible-lint --force-color
+  flake8
