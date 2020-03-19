@@ -7,3 +7,4 @@
   roles:
     - role: heytrav.influxdb
       influxdb_admin_user_password: abc12345xyz!
+      influxdb_http_auth_enabled: true
