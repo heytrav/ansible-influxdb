@@ -26,6 +26,5 @@
   replace:
     regexp: '^(\s+auth-enabled\s+=\s+).*'
     replace:  '\1{{ influxdb_http_auth_enabled | lower }}'
-    path: /etc/influxdb/influxdb.conf 
+    path: /etc/influxdb/influxdb.conf
   notify: influxdb restarted
-  
