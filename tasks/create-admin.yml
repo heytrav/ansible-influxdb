@@ -21,3 +21,11 @@
     user_name: "{{ influxdb_admin_user }}"
     user_password: "{{ influxdb_admin_user_password }}"
     state: present
+
+- name: Set authentication over HTTP/HTTPs
+  replace:
+    regexp: '^(\s+auth-enabled\s+=\s+).*'
+    replace:  '\1{{ influxdb_http_auth_enabled | lower }}'
+    path: /etc/influxdb/influxdb.conf 
+  notify: influxdb restarted
+  

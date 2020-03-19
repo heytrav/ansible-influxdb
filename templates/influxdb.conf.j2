@@ -256,7 +256,7 @@
   bind-address = "{{ influxdb_http_bind_address }}"
 
   # Determines whether user authentication is enabled over HTTP/HTTPS.
-  auth-enabled = {{ influxdb_http_auth_enabled | lower }}
+  auth-enabled = false
 
   # The default realm sent back when issuing a basic auth challenge.
   realm = "{{ influxdb_http_realm }}"
