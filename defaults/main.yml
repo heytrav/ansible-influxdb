@@ -1,5 +1,5 @@
 ---
-influxdb_version: 1.7.9
+influxdb_version: 1.8.0
 
 
 influxdb_index_version: tsi1
