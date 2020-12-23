@@ -1,8 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  become: true
-  vars:
-    ansible_user: ansible
-  roles:
-    - role: heytrav.influxdb
+  tasks:
+    - name: "Include heytrav.influxdb"
+      include_role:
+        name: "heytrav.influxdb"
