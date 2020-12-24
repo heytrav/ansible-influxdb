@@ -44,3 +44,12 @@
       assert:
           that: not system.changed
 
+    - name: Start service
+      systemd:
+          name: influxdb
+          state: started
+      register: started_influx
+
+    - name: Assert service was running
+      assert:
+          that: not started_influx.changed
