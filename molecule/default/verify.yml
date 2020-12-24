@@ -5,6 +5,42 @@
   hosts: all
   gather_facts: false
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+    - name: Check that influx config exists
+      stat:
+        path: /etc/influxdb/influxdb.conf
+      register: p
+
+    - name: Assert existence of file
+      assert:
+          that: p.stat.exists
+
+    - name: Assert owner is root
+      assert:
+          that: p.stat.pw_name == "root"
+
+    - name: Assert group is root
+      assert:
+          that: p.stat.gr_name == "root"
+
+    - name: Slurp in config
+      slurp:
+          src: /etc/influxdb/influxdb.conf
+      register: config
+
+    - name: Assert that file does not contain wrong booleans
+      assert:
+          that: 
+            - not (config.content | b64decode) is search('True')
+            - not (config.content | b64decode) is search('False')
+
+
+    - name: Enable service
+      systemd:
+          name: influxdb
+          enabled: yes
+      register: system
+
+    - name: Assert service is enabled
+      assert:
+          that: not system.changed
+

@@ -1,12 +1,43 @@
 ---
+
+default_platform: &platform
+  privileged: true
+  tmpfs:
+    - /run
+    - /tmp
+  volumes:
+    - "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  command: /lib/systemd/systemd
+  tty: true
+  environment:
+    container: docker
+
+
 dependency:
   name: galaxy
 driver:
   name: docker
 platforms:
-  - name: instance
-    image: docker.io/pycontribs/centos:8
-    pre_build_image: true
+  - name: centos8
+    image: centos:8
+    published_ports:
+        - "127.0.0.1:10002:80/tcp"
+    <<: *platform
+  - name: centos7
+    image: geerlingguy/docker-centos7-ansible
+    published_ports:
+        - "127.0.0.1:10003:80/tcp"
+    <<: *platform
+  - name: bionic
+    image: geerlingguy/docker-ubuntu1804-ansible:latest
+    published_ports:
+        - "127.0.0.1:10004:80/tcp"
+    <<: *platform
+  - name: focal
+    image: geerlingguy/docker-ubuntu2004-ansible:latest
+    published_ports:
+        - "127.0.0.1:10005:80/tcp"
+    <<: *platform
 provisioner:
   name: ansible
 verifier:

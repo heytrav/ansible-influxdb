@@ -1,7 +1,5 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include heytrav.influxdb"
-      include_role:
-        name: "heytrav.influxdb"
+  roles:
+      - role: heytrav.influxdb

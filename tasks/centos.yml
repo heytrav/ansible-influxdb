@@ -3,6 +3,10 @@
     file: vars/centos.yml
     name: source
 
+- name: Import variables based on centos version
+  include_vars:
+    file: "centos-{{ ansible_distribution_major_version }}.yml"
+
 - name: Install epel release
   yum:
     name: epel-release
@@ -10,13 +14,15 @@
 
 - name: Install pip
   yum:
-    name: python-pip
+    name: "{{ pip_version }}"
     state: present
     update_cache: yes
+
 
 - name: Install influxdb
   yum:
     name: "{{ influxdb_url }}"
     state: present
+    disable_gpg_check: true
   notify:
     - influxdb started
