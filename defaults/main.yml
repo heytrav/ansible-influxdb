@@ -1,5 +1,7 @@
 ---
-influxdb_version: 1.8.3
+influxdb_version: 2.0.3
+debian_arch: amd64
+centos_arch: x86_64
 
 
 influxdb_index_version: tsi1

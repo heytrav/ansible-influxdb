@@ -1,1 +1,2 @@
-influxdb_url: "https://dl.influxdata.com/influxdb/releases/influxdb_{{ influxdb_version }}_amd64.deb"
+influxdb_url: "https://dl.influxdata.com/influxdb/releases/influxdb2_{{ influxdb_version }}_{{ debian_arch }}.deb"
+arch: amd64

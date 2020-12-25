@@ -1,1 +1,1 @@
-influxdb_url: "https://dl.influxdata.com/influxdb/releases/influxdb-{{ influxdb_version }}.x86_64.rpm"
+influxdb_url: "https://dl.influxdata.com/influxdb/releases/influxdb2-{{ influxdb_version }}.{{ centos_arch }}.rpm"
