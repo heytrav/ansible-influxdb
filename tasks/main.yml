@@ -12,16 +12,27 @@
     owner: root
     group: root
     mode: 0744
+  notify: influxdb started
 
-- name: Set up template file
-  template:
-    src: templates/influxdb.conf.j2
-    dest: /etc/influxdb/influxdb.conf
+- name: Replace location of config
+  replace:
+    path: /etc/default/influxdb2
+    regexp: '^(INFLUXD_CONFIG_PATH=).*'
+    replace: '\1{{ influxdb_config_path }}'
+  notify: influxdb restarted
+
+- name: Create influxdb options
+  set_fact:
+    influxdb_options: "{{ influxdb_config_options }}"
+
+- name: Create configuration file
+  copy:
+    content: "{{ influxdb_options | to_nice_yaml }}"
+    dest: "{{ influxdb_config_path }}"
     owner: root
     group: root
-  notify:
-    - influxdb started
-    - influxdb restarted
+    mode: 0644
+  notify: influxdb restarted
 
 - import_tasks: create-admin.yml
   when: influxdb_admin_user_password is defined

@@ -1,5 +1,4 @@
 ---
-
 default_platform: &platform
   privileged: true
   tmpfs:
@@ -12,7 +11,6 @@ default_platform: &platform
   environment:
     container: docker
 
-
 dependency:
   name: galaxy
 driver:
@@ -21,15 +19,23 @@ platforms:
   - name: centos8
     image: centos:8
     <<: *platform
+    published_ports:
+        - "127.0.0.1:10002:8086/tcp"
   - name: centos7
     image: geerlingguy/docker-centos7-ansible
     <<: *platform
+    published_ports:
+        - "127.0.0.1:10003:8086/tcp"
   - name: bionic
     image: geerlingguy/docker-ubuntu1804-ansible:latest
     <<: *platform
+    published_ports:
+        - "127.0.0.1:10004:8086/tcp"
   - name: focal
     image: geerlingguy/docker-ubuntu2004-ansible:latest
     <<: *platform
+    published_ports:
+        - "127.0.0.1:10005:8086/tcp"
 provisioner:
   name: ansible
 verifier:

@@ -3,10 +3,11 @@
     name:
       - requests
       - influxdb
+      - pexpect
     state: present
 
 - name: Start influxd
-  service:
+  systemd:
     name: influxd
     state: started
 
@@ -15,16 +16,16 @@
     host: localhost
     port: 8086
 
-- name: Add admin user to influx
-  influxdb_user:
-    admin: yes
-    user_name: "{{ influxdb_admin_user }}"
-    user_password: "{{ influxdb_admin_user_password }}"
-    state: present
 
-- name: Set authentication over HTTP/HTTPs
-  replace:
-    regexp: '^(\s+auth-enabled\s+=\s+).*'
-    replace:  '\1{{ influxdb_http_auth_enabled | lower }}'
-    path: /etc/influxdb/influxdb.conf
-  notify: influxdb restarted
+- name: Run initial setup to create admin user
+  expect:
+    command: influx setup
+    responses:
+      '.*primary\susername': "{{ influxdb_admin_user }}"
+      '.*type\syour\spassword.*': "{{ influxdb_admin_user_password }}"
+      '.*organization.*': "{{ influxdb_admin_organization }}"
+      '.*bucket.*': "{{ influxdb_primary_bucket }}"
+      '.*retention.*': "{{ influxdb_retention_period }}"
+      '.*Confirm.*': "y"
+    creates: /root/.influxdbv2/configs
+  no_log: true

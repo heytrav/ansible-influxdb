@@ -3,56 +3,11 @@ influxdb_version: 2.0.3
 debian_arch: amd64
 centos_arch: x86_64
 
-assets-path:
-bolt-path:
-e2e-testing:
-engine-path:
-http-bind-address:
-inluxql-max-select-buckets:
-influxql-max-select-point:
-influxql-max-select-series:
-log-level:
-new-meta-store:
-new-meta-store-read-only:
-no-tasks:
-query-concurrency:
-query-initial-memory-bytes:
-query-max-memory-bytes:
-query-memory-bytes:
-query-queue-size:
-reporting-disabled:
-secret-store:
-session-length:
-session-renew-disabled:
-storage-cache-max-memory-size:
-storage-cache-snapshot-memory-size:
-storage-cache-snapshot-write-cold-duration:
-storage-compact-full-write-cold-duration:
-storage-compact-throughput-burst:
-storage-max-concurrent-compactions:
-storage-max-index-log-file-size:
-storage-retention-check-interval:
-storage-series-file-max-concurrent-snapshot-compactions:
-storage-series-id-set-cache-size:
-storage-shard-precreator-advance-period:
-storage-shard/precreator-check-interval:
-storage-tsm-use-madv-willneed:
-storage-validate-keys:
-storage-wal-fsync-delay:
-store:
-tls-cert:
-tls-key:
-tls-min-version:
-tls-strict-ciphers:
-tracing-type:
-vault-addr:
-vault-cacert:
-vault-capath:
-vault-client-cert:
-vault-client-key:
-vault-max-retries:
-vault-client-timeout:
-vault-skip-verify:
-vault-tls-server-name:
-vault-token:
+influxdb_config_path: /etc/influxdb/config.yml
 
+influxdb_admin_user: admin
+influxdb_admin_organization: admin
+
+influxdb_log_level: info
+influxdb_primary_bucket: primary
+influxdb_retention_period: "{{ 24 * 180 }}" # 180 days (in hrs)

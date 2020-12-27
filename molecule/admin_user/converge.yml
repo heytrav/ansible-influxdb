@@ -4,3 +4,4 @@
   roles:
       - role: heytrav.influxdb
         influxdb_log_level: debug
+        influxdb_admin_user_password: N0tMyPa$sWord!

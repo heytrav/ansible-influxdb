@@ -1,0 +1,43 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Check that influx config exists
+      stat:
+        path: /etc/influxdb/config.yml
+      register: p
+
+    - name: Assert existence of file
+      assert:
+          that: p.stat.exists
+
+    - name: Assert owner is root
+      assert:
+          that: p.stat.pw_name == "root"
+
+    - name: Assert group is root
+      assert:
+          that: p.stat.gr_name == "root"
+
+    - name: Enable service
+      systemd:
+          name: influxdb
+          enabled: yes
+      register: system
+
+    - name: Assert service is enabled
+      assert:
+          that: not system.changed
+
+    - name: Start service
+      systemd:
+          name: influxdb
+          state: started
+      register: started_influx
+
+    - name: Assert service was running
+      assert:
+          that: not started_influx.changed
