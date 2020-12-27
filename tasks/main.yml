@@ -5,6 +5,14 @@
 - import_tasks: centos.yml
   when: ansible_distribution == 'CentOS'
 
+- name: Create directory for config
+  file:
+    path: /etc/influxdb
+    state: directory
+    owner: root
+    group: root
+    mode: 0744
+
 - name: Set up template file
   template:
     src: templates/influxdb.conf.j2
