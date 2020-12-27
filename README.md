@@ -25,7 +25,7 @@ Role Variables
 | influxdb_primary_bucket | primary | |
 | influxdb_retention_period | `24 * 180` | Retention period in hours. Defaults to 180 days |
 
-See the [InfluxDB documentation](https://docs.influxdata.com/influxdb/v2.0/reference/config-options/) for a description of configuration options. This role assumes the default values for all configuration options. The following variables can be used to override the default values:
+See the [InfluxDB documentation](https://docs.influxdata.com/influxdb/v2.0/reference/config-options/) for a description of configuration options. This role assumes the official documented default values for all configuration options. The following variables can be used to override the default values:
 
 * `influxdb_assets_path`
 * `influxdb_bolt_path`
