@@ -7,7 +7,7 @@
   tasks:
     - name: Check that influx config exists
       stat:
-        path: /etc/influxdb/influxdb.conf
+        path: /etc/influxdb/config.yml
       register: p
 
     - name: Assert existence of file
@@ -21,18 +21,6 @@
     - name: Assert group is root
       assert:
           that: p.stat.gr_name == "root"
-
-    - name: Slurp in config
-      slurp:
-          src: /etc/influxdb/influxdb.conf
-      register: config
-
-    - name: Assert that file does not contain wrong booleans
-      assert:
-          that: 
-            - not (config.content | b64decode) is search('True')
-            - not (config.content | b64decode) is search('False')
-
 
     - name: Enable service
       systemd:

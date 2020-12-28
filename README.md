@@ -18,14 +18,14 @@ Role Variables
 | Variable  | Default | Description |
 | ---  | --- | --- |
 | influxdb_url | | Source url for influxdb package. Depends on OS (Centos or Ubuntu) |
-|influxdb_version| 2.0.3 | | 
+|influxdb_version| 2.0.3 | InfluxDB version | 
 | influxdb_admin_user | admin | Name of the admin user |
 | influxdb_admin_user_password | _not defined_ | Define this if you want to create an admin user. Default behaviour is to not create an admin user.| 
 | influxdb_admin_organization | admin | Organisation name of admin user |
-| influxdb_primary_bucket | primary | |
+| influxdb_primary_bucket | "primary" | |
 | influxdb_retention_period | `24 * 180` | Retention period in hours. Defaults to 180 days |
 
-See the [InfluxDB documentation](https://docs.influxdata.com/influxdb/v2.0/reference/config-options/) for a description of configuration options. This role assumes the official documented default values for all configuration options. The following variables can be used to override the default values:
+See the [InfluxDB documentation](https://docs.influxdata.com/influxdb/v2.0/reference/config-options/) for a description of configuration options. This role assumes the official documented default values for all configuration options. The following variables can be used to override the InfluxDB default values:
 
 * `influxdb_assets_path`
 * `influxdb_bolt_path`
@@ -95,7 +95,9 @@ passed in as parameters) is always nice for users too:
 
     - hosts: servers
       roles:
-         - { role: heytrav.influxdb, influxdb_admin_user_password: "{{ vault_admin_user_password }}" }
+        - role: heytrav.influxdb
+          influxdb_admin_user_password: "{{ vault_influxdb_admin_user_password }}"
+
 
 License
 -------
