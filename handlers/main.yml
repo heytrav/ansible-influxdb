@@ -3,7 +3,7 @@
   systemd:
     name: influxd
     state: started
-    daemon_reload: yes
+    daemon_reload: true
 
 - name: influxdb restarted
   systemd:

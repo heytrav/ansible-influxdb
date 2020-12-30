@@ -53,4 +53,3 @@ influxdb_config_options:
   vault-skip-verify: "{{ influxdb_vault_skip_verify | default(omit) }}"
   vault-tls-server-name: "{{ influxdb_vault_tls_server_name | default(omit) }}"
   vault-token: "{{ influxdb_vault_token | default(omit) }}"
-

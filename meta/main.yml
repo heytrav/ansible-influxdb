@@ -10,12 +10,12 @@ galaxy_info:
   platforms:
     - name: EL
       versions:
-      - 7
-      - 8
+        - 7
+        - 8
     - name: Ubuntu
       versions:
-      - bionic
-      - focal
+        - bionic
+        - focal
 
   galaxy_tags: ['influxdb', 'monitoring']
 

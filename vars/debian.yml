@@ -1,2 +1,3 @@
+---
 influxdb_url: "https://dl.influxdata.com/influxdb/releases/influxdb2_{{ influxdb_version }}_{{ debian_arch }}.deb"
 arch: amd64

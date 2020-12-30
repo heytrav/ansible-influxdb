@@ -1,3 +1,4 @@
+---
 - name: Import package download url
   include_vars:
     file: vars/centos.yml
@@ -16,7 +17,7 @@
   yum:
     name: "{{ pip_version }}"
     state: present
-    update_cache: yes
+    update_cache: true
 
 
 - name: Install influxdb

@@ -1,3 +1,4 @@
+---
 - name: Install some python dependencies
   pip:
     name:
