@@ -1,4 +1,5 @@
 ---
+
 - import_tasks: debian.yml
   when: ansible_distribution in ['Ubuntu', 'Debian']
 
@@ -36,3 +37,6 @@
 
 - import_tasks: create-admin.yml
   when: influxdb_admin_user_password is defined
+
+- include_tasks: create-user.yml
+  loop: "{{ influxdb_users }}"

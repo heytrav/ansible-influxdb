@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: influxdb
-  author: Travis Holton
+  author: heytrav
   description: Install and configure Influx DB
   company: Catalyst
   license: BSD

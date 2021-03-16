@@ -1,0 +1,20 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+      - role: heytrav.influxdb
+        influxdb_log_level: debug
+        influxdb_admin_user_password: N0tMyPa$sWord!
+        influxdb_users:
+          - user: fred
+            password: N1tMyPa$sw0rd!
+            org: superduperorg
+          - user: barny
+            password: N1tMyPa$sw0rd!
+            org: otherorg
+          - user: wilma
+            password: N1tMyPa$sw0rd!
+            org: superduperorg
+          - user: bernie
+            password: N1tMyPa$sw0rd!
+            org: someotherorg

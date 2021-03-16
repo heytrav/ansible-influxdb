@@ -11,3 +11,4 @@ influxdb_admin_organization: admin
 influxdb_log_level: info
 influxdb_primary_bucket: primary
 influxdb_retention_period: "{{ 24 * 180 }}"  # 180 days (in hrs)
+influxdb_users: []
