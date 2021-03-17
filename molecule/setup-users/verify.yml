@@ -1,0 +1,23 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Query influx orgs
+      ansible.builtin.command:
+        cmd: influx org list
+      register: org_output
+
+    - name: check that fred's organisation is in orgs
+      assert:
+        that: org_output.stdout is search('superduper')
+
+
+    - name: Fetch list of users
+      ansible.builtin.command:
+        cmd: influx user list
+      register: user_output
+
+    - name: Check that fred is in user list
+      assert:
+        that: user_output.stdout is search('fred')

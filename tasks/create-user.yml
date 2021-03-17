@@ -1,0 +1,24 @@
+- name: Create organisation
+  ansible.builtin.command:
+    cmd: influx org create -n {{ item.org }}
+  register: create_org_result
+  failed_when:
+    - create_org_result.rc == 1
+    - not create_org_result.stdout is search('already exists')
+  changed_when:
+    - create_org_result.rc == 0
+    - create_org_result.stdout is search('ID')
+    - create_org_result.stdout is search(item.org)
+  ignore_errors: true
+
+- name: Create influxdb user
+  ansible.builtin.command:
+    cmd: influx user create -n {{ item.user }} -o {{ item.org }} -p {{ item.password }}
+  register: create_user_result
+  failed_when:
+    - create_user_result.rc == 1
+    - not create_user_result.stdout is search('already exists')
+  changed_when:
+    - create_user_result.rc == 0
+    - create_user_result.stdout is search('ID')
+    - create_user_result.stdout is search(item.user)
