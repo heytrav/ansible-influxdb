@@ -12,17 +12,17 @@
       assert:
         that: p.stat.exists
 
-    - name: Assert owner is root
+    - name: Assert owner is influxdb
       assert:
-        that: p.stat.pw_name == "root"
+        that: p.stat.pw_name == "influxdb"
 
-    - name: Assert group is root
+    - name: Assert group is influxdb
       assert:
-        that: p.stat.gr_name == "root"
+        that: p.stat.gr_name == "influxdb"
 
     - name: Enable service
       systemd:
-        name: influxdb
+        name: influxd
         enabled: true
       register: system
 
@@ -32,7 +32,7 @@
 
     - name: Start service
       systemd:
-        name: influxdb
+        name: influxd
         state: started
       register: started_influx
 
