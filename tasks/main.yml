@@ -10,8 +10,8 @@
   file:
     path: /etc/influxdb
     state: directory
-    owner: root
-    group: root
+    owner: influxdb
+    group: influxdb
     mode: 0744
   notify: influxdb started
 
@@ -20,7 +20,7 @@
     path: /etc/default/influxdb2
     regexp: '^(INFLUXD_CONFIG_PATH=).*'
     replace: '\1{{ influxdb_config_path }}'
-  notify: influxdb started
+  notify: influxdb restarted
 
 - name: Create influxdb options
   set_fact:
@@ -30,10 +30,10 @@
   copy:
     content: "{{ influxdb_options | to_nice_yaml }}"
     dest: "{{ influxdb_config_path }}"
-    owner: root
-    group: root
+    owner: influxdb
+    group: influxdb
     mode: 0644
-  notify: influxdb started
+  notify: influxdb restarted
 
 - import_tasks: create-admin.yml
   when: influxdb_admin_user_password is defined

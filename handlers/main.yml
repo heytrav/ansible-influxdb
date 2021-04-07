@@ -4,3 +4,8 @@
     name: influxd
     state: started
     daemon_reload: true
+
+- name: influxdb restarted
+  systemd:
+    name: influxd
+    state: restarted
