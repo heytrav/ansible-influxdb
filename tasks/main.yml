@@ -20,7 +20,7 @@
     path: /etc/default/influxdb2
     regexp: '^(INFLUXD_CONFIG_PATH=).*'
     replace: '\1{{ influxdb_config_path }}'
-  notify: influxdb restarted
+  notify: influxdb started
 
 - name: Create influxdb options
   set_fact:
@@ -33,7 +33,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: influxdb restarted
+  notify: influxdb started
 
 - import_tasks: create-admin.yml
   when: influxdb_admin_user_password is defined
